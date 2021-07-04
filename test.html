@@ -1,0 +1,34 @@
+
+<vyvy-template vy-if="hehe">
+    <h1 >heheha</h1>
+    <h2 >hahaha</h2>
+    <h3 >huhuhu</h3>
+    <h4 >xxxxx</h4>
+</vyvy-template>
+
+<input type="text" vy-input="named" />
+
+<select vy-input="kelamin">
+    <option>Pilih</option>
+    <option value="1">Laki laki</option>
+    <option value="2">Perempuan</option>    
+</select>
+
+<button vy-click="rmfunc">gas</button>
+<script src="vyvy.js"></script>
+<script>
+
+vyData.hehe = false;
+function rmfunc(){
+    if(vyData.hehe == true){
+        vyData.hehe = false;
+    }else{
+        vyData.hehe = true;
+    }
+
+}
+
+console.log(vyData);
+
+
+</script>
