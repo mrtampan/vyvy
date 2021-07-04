@@ -64,7 +64,6 @@ function conditionalRender(){
         }
     })
 }
-conditionalRender();
 
 // end conditional rendering
 
