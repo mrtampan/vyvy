@@ -14,8 +14,6 @@ simple library javascript
 
 ### Quick Start
 
-If you don't want the auto init, remove the `init` attribute and move the scripts to end of `<body>`:
-
 ```html
 <script src="https://cdn.jsdelivr.net/gh/mrtampan/vyvy/vyvy.js"></script>
 <script>
