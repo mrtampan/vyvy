@@ -33,7 +33,7 @@ conditionalRender();
 
 ### `vyData`
 
-Use `vydata` to store values locally
+    Use `vydata` to store values locally
 
 ```html
 <script src="https://cdn.jsdelivr.net/gh/mrtampan/vyvy/vyvy.js"></script>
@@ -55,36 +55,20 @@ Use `vy-input` allows you to bind the value of an input element to vyData
     <option value="male">Man</option>
     <option value="female">Female</option>
 </select>
+<textarea vy-input="desc"></textarea>
 
 <script src="https://cdn.jsdelivr.net/gh/mrtampan/vyvy/vyvy.js"></script>
 <script>
     alert(vyData.chose);
-    alerT(vyData.firstname);
+    alert(vyData.firstname);
+    alert(vyData.desc);
 </script>
 ```
 
-### `vy-input`
-
-Use `vy-input` allows you to bind the value of an input element to vyData
-
-```html
-<input type="text" vy-input="firstname" />
-<select vy-input="chose">
-    <option>Choose</option>
-    <option value="male">Man</option>
-    <option value="female">Female</option>
-</select>
-
-<script src="https://cdn.jsdelivr.net/gh/mrtampan/vyvy/vyvy.js"></script>
-<script>
-    alert(vyData.chose);
-    alerT(vyData.firstname);
-</script>
-```
 
 ### `vy-if`
 
-Use `vy-if` to remove and display components, but must use tags `<vyvy-template>`
+Use `vy-if` to remove and display components, but must use tags `<template>`
 
 ```html
 <vyvy-template vy-if="activeComponent">
@@ -114,5 +98,28 @@ Use `vy-click` event handling onclick
 function testFunc(){
     alert("testing");
 }
+</script>
+```
+
+### `vy-on`
+
+Use `vy-on` to use vanillaJS events, how to use it requires 2 parameters (event:functionname)
+
+```html
+<input vy-on="keyup:upperfunc" id="naming"/>
+<button vy-on="click:testFunc">testing</button>
+
+
+<script src="https://cdn.jsdelivr.net/gh/mrtampan/vyvy/vyvy.js"></script>
+<script>
+function upperfunc(){
+    let x = document.getElementById("naming");
+    x.value = x.value.toUpperCase();
+}
+    
+function testFunc(){
+    alert("testing");
+}
+
 </script>
 ```

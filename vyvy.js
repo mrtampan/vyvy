@@ -9,16 +9,19 @@
 var attributInput = 'vy-input',
 attributIf = 'vy-if',
 attributClick = 'vy-click',
+attributChange = 'vy-change',
+attributOn = 'vy-on',
 elInput = document.querySelectorAll('[' + attributInput + ']'),
 elIf = document.querySelectorAll('[' + attributIf + ']'),
 elClick = document.querySelectorAll('[' + attributClick + ']'),
+elOn = document.querySelectorAll('[' + attributOn + ']'),
 vyData = {};
 
 //end all variable
 
 // create data input binding
     
-elInput.forEach(function(elemen){
+elInput.forEach((elemen) => {
     if(elemen.type == 'text' || elemen.type == 'textarea' || elemen.type == 'number' || elemen.type == 'password'){
         let propertiesToBind = elemen.getAttribute(attributInput);
         elemen.onkeyup = function(){
@@ -39,9 +42,9 @@ elInput.forEach(function(elemen){
 
 var saveChildTemplate = [];
 function conditionalRender(){
-    elIf.forEach(function(elemen){
+    elIf.forEach((elemen) => {
         let tagname = elemen.tagName;
-        if(tagname == 'VYVY-TEMPLATE'){
+        if(tagname == 'VY-TEMPLATE'){
             let propertiesToBind = elemen.getAttribute(attributIf);
             let saveElemen = elemen;
             let childProp = elemen.children;
@@ -60,7 +63,7 @@ function conditionalRender(){
                 }
             }
         }else{
-            console.error("vy-if must use tag <vyvy-template>");
+            console.error("vy-if must use tag <template>");
         }
     })
 }
@@ -69,10 +72,9 @@ function conditionalRender(){
 
 // start event
 
-elClick.forEach(function(elemen){
+elClick.forEach((elemen) => {
     let propertiesToBind = elemen.getAttribute(attributClick);
     console.log(propertiesToBind);
-    elemen.setAttribute('onclick', propertiesToBind + '()');
     elemen.onclick = function (){
         window[propertiesToBind]();
         conditionalRender();
@@ -80,4 +82,24 @@ elClick.forEach(function(elemen){
     
 })
 
+elOn.forEach((elemen) => {
+    let propertiesToBind = elemen.getAttribute(attributOn);
+    let attributValue = propertiesToBind.split(":");
+    if(propertiesToBind.includes(":")){
+        if(attributValue.length == 2){
+            elemen[ 'on'+ attributValue[0]] = function(){
+                window[attributValue[1]]();
+                conditionalRender();             
+            }
+        }else{
+            console.error("vy-on must contain 2 parameter");
+        }
+    }else {
+        console.error("vy-on must contain event:functionName");
+    }
+})
+
 // end event
+
+
+

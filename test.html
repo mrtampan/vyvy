@@ -1,10 +1,10 @@
 
-<vyvy-template vy-if="hehe">
+<vy-template vy-if="hehe">
     <h1 >heheha</h1>
     <h2 >hahaha</h2>
     <h3 >huhuhu</h3>
     <h4 >xxxxx</h4>
-</vyvy-template>
+</vy-template>
 
 <input type="text" vy-input="named" />
 
@@ -14,7 +14,12 @@
     <option value="2">Perempuan</option>    
 </select>
 
+<input vy-on="keyup:upperfunc" id="fname"/>
+
 <button vy-click="rmfunc">gas</button>
+
+<button vy-on="click:rmfunc">gas</button>
+
 <script src="vyvy.js"></script>
 <script>
 
@@ -26,6 +31,11 @@ function rmfunc(){
         vyData.hehe = true;
     }
 
+}
+
+function upperfunc(){
+    let x = document.getElementById("fname");
+    x.value = x.value.toUpperCase();
 }
 
 console.log(vyData);
