@@ -1,6 +1,6 @@
 # vyvy
 
-simple library javascript
+Vyvy.js is a javascript library for creating user interfaces, without using a virtual dom, directly using the original dom, the purpose of making vyvy.js to help develop simple applications without having to install a javascript framework
 
 
 ## Installation
@@ -24,9 +24,9 @@ vyData.lastname = "sana";
 // end variable state
 
 
-// render conditional IF
+// start Initializing
 vyInit();
-// end render conditional IF
+// end Initializing
 </script>
 ```
 
@@ -71,12 +71,12 @@ Use `vy-input` allows you to bind the value of an input element to vyData
 Use `vy-if` to remove and display components, but must use tags `<template>`
 
 ```html
-<vyvy-template vy-if="activeComponent">
+<vy-template vy-if="activeComponent">
     <h1 >heheha</h1>
     <h2 >hahaha</h2>
     <h3 >huhuhu</h3>
     <h4 >xxxxx</h4>
-</vyvy-template>
+</vy-template>
 
 <script src="https://cdn.jsdelivr.net/gh/mrtampan/vyvy/vyvy.js"></script>
 <script>
