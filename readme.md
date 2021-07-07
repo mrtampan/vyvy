@@ -25,7 +25,7 @@ vyData.lastname = "sana";
 
 
 // render conditional IF
-conditionalRender();
+vyInit();
 // end render conditional IF
 </script>
 ```
@@ -33,7 +33,7 @@ conditionalRender();
 
 ### `vyData`
 
-    Use `vydata` to store values locally
+Use `vydata` to store values locally
 
 ```html
 <script src="https://cdn.jsdelivr.net/gh/mrtampan/vyvy/vyvy.js"></script>
@@ -86,21 +86,6 @@ conditionalRender();
 </script>
 ```
 
-### `vy-click`
-
-Use `vy-click` event handling onclick
-
-```html
-<button vy-click="testFunc">Testing</button>
-
-<script src="https://cdn.jsdelivr.net/gh/mrtampan/vyvy/vyvy.js"></script>
-<script>
-function testFunc(){
-    alert("testing");
-}
-</script>
-```
-
 ### `vy-on`
 
 Use `vy-on` to use vanillaJS events, how to use it requires 2 parameters (event:functionname)
@@ -121,5 +106,66 @@ function testFunc(){
     alert("testing");
 }
 
+</script>
+```
+
+### `vy-text`
+
+Use `vy-text` use v-text to display data from `vyData`
+
+```html
+<div vy-text="name"></div>
+<div vy-text="age"></div>
+<script src="https://cdn.jsdelivr.net/gh/mrtampan/vyvy/vyvy.js"></script>
+
+<script>
+    vyData.name = "mina";
+    vyData.age = 21;
+</script>
+```
+
+### `vy-html`
+
+Use `vy-html` to convert data from `vyData` to html
+
+```html
+<div vy-html="sweetword"></div>
+<script src="https://cdn.jsdelivr.net/gh/mrtampan/vyvy/vyvy.js"></script>
+
+<script>
+    vyData.sweetword = '<b>Kamu benar benar wangy wangy wangy</b>';
+</script>
+```
+
+### `vy-for`
+
+Use `vy-for` for looping data from `vyData`, how to use it requires 2 parameters (alias:dataarray)
+
+```html
+<vy-template vy-for="color:colors">
+    <div vy-for-val="color"></div>
+</vy-template>
+<script src="https://cdn.jsdelivr.net/gh/mrtampan/vyvy/vyvy.js"></script>
+
+<script>
+vyData.colors = [
+    'biru', 'kuning', 'merah'
+]
+</script>
+```
+
+
+### `vy-click`
+
+Use `vy-click` event handling onclick
+
+```html
+<button vy-click="testFunc">Testing</button>
+
+<script src="https://cdn.jsdelivr.net/gh/mrtampan/vyvy/vyvy.js"></script>
+<script>
+function testFunc(){
+    alert("testing");
+}
 </script>
 ```

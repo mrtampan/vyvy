@@ -1,5 +1,5 @@
 
-<vy-template vy-if="hehe">
+<!-- <vy-template vy-if="hehe">
     <h1 >heheha</h1>
     <h2 >hahaha</h2>
     <h3 >huhuhu</h3>
@@ -18,29 +18,49 @@
 
 <button vy-click="rmfunc">gas</button>
 
-<button vy-on="click:rmfunc">gas</button>
+<button vy-on="click:rmfunc">gas</button> -->
+
+<input type="text" vy-input="namadepan" />
+<input type="text" vy-input="namabelakang" />
+
+<div vy-text="namadepan"></div>
+<div vy-text="namabelakang"></div>
+
+<vy-template vy-for="color:colors">
+    <div vy-for-val="color"></div>
+</vy-template>
+
+<div vy-html="htmltest"></div>
 
 <script src="vyvy.js"></script>
 <script>
 
-vyData.hehe = true;
-function rmfunc(){
-    if(vyData.hehe == true){
-        vyData.hehe = false;
-    }else{
-        vyData.hehe = true;
-    }
+vyData.namadepan = '';
+vyData.namabelakang = '';
 
-}
+vyData.htmltest = '<b>Mina Laff yuu</b>'
 
-function upperfunc(){
-    let x = document.getElementById("fname");
-    x.value = x.value.toUpperCase();
-}
+vyData.colors = [
+    'biru', 'kuning', 'merah'
+]
+// vyData.hehe = true;
+// function rmfunc(){
+//     if(vyData.hehe == true){
+//         vyData.hehe = false;
+//     }else{
+//         vyData.hehe = true;
+//     }
 
-console.log(vyData);
+// }
 
-conditionalRender();
+// function upperfunc(){
+//     let x = document.getElementById("fname");
+//     x.value = x.value.toUpperCase();
+// }
+
+// console.log(vyData);
+
+vyInit();
 
 
 </script>
