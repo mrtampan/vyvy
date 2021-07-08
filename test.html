@@ -26,9 +26,16 @@
 <div vy-text="namadepan"></div>
 <div vy-text="namabelakang"></div>
 
-<vy-template vy-for="color:colors">
-    <div vy-for-val="color"></div>
+<vy-template vy-for="color:colors" vy-if="colorActive" >
+    <div vy-for-val="color.nama.depan"></div>
+    <div vy-for-val="color.warna"></div>
 </vy-template>
+
+
+<vy-template vy-for="warna:warnaku" >
+    <div vy-for-val="warna"></div>
+</vy-template>
+
 
 <div vy-html="htmltest"></div>
 
@@ -40,9 +47,16 @@ vyData.namabelakang = '';
 
 vyData.htmltest = '<b>Mina Laff yuu</b>'
 
-vyData.colors = [
-    'biru', 'kuning', 'merah'
+vyData.warnaku= [
+    'merah', 'kuning', 'hijau', 'biru'
 ]
+
+
+vyData.colors = [
+    {'warna':'biru', 'nama': {'depan' : 'cuk'}}, {'warna':'kuning', 'nama': {'depan' : 'cak'}}, {'warna':'merah', 'nama': {'depan' : 'cok'}}
+]
+
+vyData.colorActive = false;
 // vyData.hehe = true;
 // function rmfunc(){
 //     if(vyData.hehe == true){

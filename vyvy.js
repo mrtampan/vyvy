@@ -66,7 +66,6 @@ function conditionalRender(){
                 }
             }
             if(vyData[propertiesToBind] == true){
-                console.log(saveChildTemplate);
                 for(let i = 0; i < saveChildTemplate.length; i++){
                     elemen.appendChild(saveChildTemplate[i]);
                 }
@@ -82,9 +81,9 @@ function conditionalRender(){
 // create List rendering
 
 
-var saveChildTemplate = [];
 function listRender(){
     elFor.forEach((elemen) => {
+        let saveChildTemplate = [];
         let tagname = elemen.tagName;
         if(tagname == 'VY-TEMPLATE'){
             let propertiesToBind = elemen.getAttribute(attributFor);
@@ -94,27 +93,57 @@ function listRender(){
                 if(attributValue.length == 2){
                     let cloneEl = [];
                     for(let i = 0; i < childProp.length; i++){
-                        
                         saveChildTemplate.push(childProp[i]);
-                        childProp[i].parentNode.removeChild(childProp[i]);
-                        for(let j = 0; j < vyData[attributValue[1]].length; j++){
-                            
-                            let elementClone = document.createElement(saveChildTemplate[i].tagName);
-                            if(saveChildTemplate[i].getAttribute('vy-for-val') != null){
-                                elementClone.setAttribute('vy-for-val', attributValue[0] + (j + ''));
-                            }
-                            
-                            vyAlias[attributValue[0] + (j + '')]  = vyData[attributValue[1]][j];
-                            
-                            cloneEl.push(elementClone);
-                        }
                         
+                    }
+
+                    while(elemen.firstChild){
+                        elemen.removeChild(elemen.firstChild);
+                    }
+                    for(let k = 0; k < vyData[attributValue[1]].length; k++){
+                            if(typeof(vyData[attributValue[1]][k]) == 'object'){
+                                
+                                for(let l = 0; l < saveChildTemplate.length; l++){
+                                    let elementClone = document.createElement(saveChildTemplate[l].tagName);
+                                    elementClone.setAttribute('class', saveChildTemplate[l].getAttribute('class') ? null : '');
+                                    
+                                    if(saveChildTemplate[l].getAttribute('vy-for-val') != null){
+
+                                        let getObj = '';
+                                        let getValue = '';
+                                        if(saveChildTemplate[l].getAttribute('vy-for-val').includes('.')){
+                                            getObj = saveChildTemplate[l].getAttribute('vy-for-val').split('.');
+                                            getObj.shift();
+                                        }
+                                        getValue =  vyData[attributValue[1]][k];
+                                        for(let m = 0; m < getObj.length; m++){
+                                            getValue = getValue[getObj[m]];
+                                        }
+                                        
+                                        elementClone.setAttribute('vy-for-val', saveChildTemplate[l].getAttribute('vy-for-val'));
+                                        elementClone.setAttribute('value', getValue);
+                                        elementClone.innerText = getValue;
+                                    }  
+                                    cloneEl.push(elementClone);                                    
+                                }
+                            }else if(typeof(vyData[attributValue[1]][k]) == 'string'){
+                                
+                                let elementClone = document.createElement(saveChildTemplate[0].tagName);
+                                elementClone.setAttribute('class', saveChildTemplate[0].getAttribute('class') ? null : '');
+                                
+                                if(saveChildTemplate[0].getAttribute('vy-for-val') != null){
+                                    elementClone.setAttribute('vy-for-val', saveChildTemplate[0].getAttribute('vy-for-val'));
+                                    elementClone.setAttribute('value', vyData[attributValue[1]][k]);
+                                    elementClone.innerText = vyData[attributValue[1]][k];
+                                }  
+                                cloneEl.push(elementClone);
+                            }
 
                     }
+
                     cloneEl.forEach((clone) => {
                         elemen.appendChild(clone);
                     })
-                    console.log("ceek");
                 }else{
                     console.error("vy-for must contain 2 parameter");
                 }
@@ -126,19 +155,7 @@ function listRender(){
         }
     })
 
-
-
 }
-
-function listRenderData(){
-    elForVal = document.querySelectorAll('[' + attributForValue + ']'),
-    elForVal.forEach((elemen) => {
-        console.log(elemen);
-        let propertiesToBind = elemen.getAttribute(attributForValue);
-        elemen.innerText = vyAlias[propertiesToBind];
-    })    
-}
-
 
 
 // end list rendering
@@ -196,7 +213,6 @@ function vyInit(){
     bindingText();
     bindingHtml();
     listRender();
-    listRenderData();
     conditionalRender();
 }
 

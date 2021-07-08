@@ -82,7 +82,6 @@ Use `vy-if` to remove and display components, but must use tags `<template>`
 <script>
 vyData.activeComponent = false;
 
-conditionalRender();
 </script>
 ```
 
@@ -139,7 +138,9 @@ Use `vy-html` to convert data from `vyData` to html
 
 ### `vy-for`
 
-Use `vy-for` for looping data from `vyData`, how to use it requires 2 parameters (alias:dataarray)
+Use `vy-for` for looping data from `vyData`, how to use it requires 2 parameters (alias:dataarray).
+
+Example with data string
 
 ```html
 <vy-template vy-for="color:colors">
@@ -150,6 +151,25 @@ Use `vy-for` for looping data from `vyData`, how to use it requires 2 parameters
 <script>
 vyData.colors = [
     'biru', 'kuning', 'merah'
+]
+</script>
+```
+
+Example with data object
+
+```html
+<vy-template vy-for="profil:profilData" >
+    <div vy-for-val="profil.firstname"></div>
+    <div vy-for-val="profil.lastname"></div>
+</vy-template>
+
+<script src="https://cdn.jsdelivr.net/gh/mrtampan/vyvy/vyvy.js"></script>
+
+<script>
+vyData.profilData = [
+    {'firstname': 'Mina', 'lastname': 'Sharon'}, 
+    {'firstname': 'Park', 'lastname': 'Jihyo'}, 
+    {'firstname': 'Jim', 'lastname': 'Dahyun'}
 ]
 </script>
 ```
