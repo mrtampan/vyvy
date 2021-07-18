@@ -26,13 +26,13 @@
 <div vy-text="namadepan"></div>
 <div vy-text="namabelakang"></div>
 
-<vy-template vy-for="color:colors" vy-if="colorActive" >
-    <div vy-for-val="color.nama.depan"></div>
-    <div vy-for-val="color.warna"></div>
+<vy-template vy-for="color:colors" >
+    <div style="font-weight: bold;" vy-for-val="color.nama.depan"></div>
+    <div style="font-style: italic;" vy-for-val="color.warna"></div>
 </vy-template>
 
 
-<vy-template vy-for="warna:warnaku" >
+<vy-template vy-for="warna:warnaku">
     <div vy-for-val="warna"></div>
 </vy-template>
 

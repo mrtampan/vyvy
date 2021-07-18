@@ -6,21 +6,21 @@
 
 
 //create all variable
-var attributInput = 'vy-input',
-attributIf = 'vy-if',
-attributClick = 'vy-click',
-attributText = 'vy-text',
-attributHtml = 'vy-html',
-attributOn = 'vy-on',
-attributFor = 'vy-for',
-attributForValue = 'vy-for-val',
-elInput = document.querySelectorAll('[' + attributInput + ']'),
-elIf = document.querySelectorAll('[' + attributIf + ']'),
-elFor = document.querySelectorAll('[' + attributFor + ']'),
-elClick = document.querySelectorAll('[' + attributClick + ']'),
-elOn = document.querySelectorAll('[' + attributOn + ']'),
-elText = document.querySelectorAll('[' + attributText + ']'),
-elHtml = document.querySelectorAll('[' + attributHtml + ']'),
+var vyAttrInput = 'vy-input',
+vyAttrIf = 'vy-if',
+vyAttrClick = 'vy-click',
+vyAttrText = 'vy-text',
+vyAttrHtml = 'vy-html',
+vyAttrOn = 'vy-on',
+vyAttrFor = 'vy-for',
+vyAttrForValue = 'vy-for-val',
+vy_el_input = document.querySelectorAll('[' + vyAttrInput + ']'),
+vy_el_if = document.querySelectorAll('[' + vyAttrIf + ']'),
+vy_el_for = document.querySelectorAll('[' + vyAttrFor + ']'),
+vy_el_click = document.querySelectorAll('[' + vyAttrClick + ']'),
+vy_el_on = document.querySelectorAll('[' + vyAttrOn + ']'),
+vy_el_text = document.querySelectorAll('[' + vyAttrText + ']'),
+vy_el_html = document.querySelectorAll('[' + vyAttrHtml + ']'),
 vyData = {};
 vyAlias = {};
 
@@ -28,16 +28,16 @@ vyAlias = {};
 
 // create data input binding
     
-elInput.forEach((elemen) => {
+vy_el_input.forEach((elemen) => {
     if(elemen.type == 'text' || elemen.type == 'textarea' || elemen.type == 'number' || elemen.type == 'password'){
-        let propertiesToBind = elemen.getAttribute(attributInput);
+        let propertiesToBind = elemen.getAttribute(vyAttrInput);
         elemen.onkeyup = function(){
             vyData[propertiesToBind] = elemen.value;
             vyLoadData();
         }
     }
     if(elemen.type == 'select-one'){
-        let propertiesToBind = elemen.getAttribute(attributInput);
+        let propertiesToBind = elemen.getAttribute(vyAttrInput);
         elemen.onchange = function(){
             vyData[propertiesToBind] = elemen.value;
             vyLoadData();
@@ -49,12 +49,12 @@ elInput.forEach((elemen) => {
 // create conditional rendering
 
 
-var saveChildTemplate = [];
-function conditionalRender(){
-    elIf.forEach((elemen) => {
+function _conditionalRender(){
+    let saveChildTemplate = [];
+    vy_el_if.forEach((elemen) => {
         let tagname = elemen.tagName;
         if(tagname == 'VY-TEMPLATE'){
-            let propertiesToBind = elemen.getAttribute(attributIf);
+            let propertiesToBind = elemen.getAttribute(vyAttrIf);
             let saveElemen = elemen;
             let childProp = elemen.children;
             if(vyData[propertiesToBind] == false){
@@ -81,21 +81,23 @@ function conditionalRender(){
 // create List rendering
 
 
-function listRender(){
-    elFor.forEach((elemen) => {
+function _listRender(){
+    vy_el_for.forEach((elemen) => {
         let saveChildTemplate = [];
         let tagname = elemen.tagName;
         if(tagname == 'VY-TEMPLATE'){
-            let propertiesToBind = elemen.getAttribute(attributFor);
-            let childProp = elemen.children;
+            let propertiesToBind = elemen.getAttribute(vyAttrFor);
+            let childProp = elemen.childNodes;
             let attributValue = propertiesToBind.split(":");
             if(propertiesToBind.includes(":")){
                 if(attributValue.length == 2){
-                    let cloneEl = [];
-                    for(let i = 0; i < childProp.length; i++){
-                        saveChildTemplate.push(childProp[i]);
-                        
-                    }
+                    let addElObject = [];
+                    let addEl = [];
+                    childProp.forEach(function(item){
+                        if(item.nodeType != Node.TEXT_NODE){
+                            saveChildTemplate.push(item);
+                        }
+                    });
 
                     while(elemen.firstChild){
                         elemen.removeChild(elemen.firstChild);
@@ -104,15 +106,13 @@ function listRender(){
                             if(typeof(vyData[attributValue[1]][k]) == 'object'){
                                 
                                 for(let l = 0; l < saveChildTemplate.length; l++){
-                                    let elementClone = document.createElement(saveChildTemplate[l].tagName);
-                                    elementClone.setAttribute('class', saveChildTemplate[l].getAttribute('class') ? null : '');
-                                    
-                                    if(saveChildTemplate[l].getAttribute('vy-for-val') != null){
-
+                                    let cloningEl = saveChildTemplate[l].cloneNode(true);
+                                   
+                                    if(saveChildTemplate[l].getAttribute(vyAttrForValue) != null){
                                         let getObj = '';
                                         let getValue = '';
-                                        if(saveChildTemplate[l].getAttribute('vy-for-val').includes('.')){
-                                            getObj = saveChildTemplate[l].getAttribute('vy-for-val').split('.');
+                                        if(saveChildTemplate[l].getAttribute(vyAttrForValue).includes('.')){
+                                            getObj = saveChildTemplate[l].getAttribute(vyAttrForValue).split('.');
                                             getObj.shift();
                                         }
                                         getValue =  vyData[attributValue[1]][k];
@@ -120,28 +120,28 @@ function listRender(){
                                             getValue = getValue[getObj[m]];
                                         }
                                         
-                                        elementClone.setAttribute('vy-for-val', saveChildTemplate[l].getAttribute('vy-for-val'));
-                                        elementClone.setAttribute('value', getValue);
-                                        elementClone.innerText = getValue;
-                                    }  
-                                    cloneEl.push(elementClone);                                    
+                                        cloningEl.innerText = getValue;
+                                    }
+
+                                    addElObject.push(cloningEl);         
                                 }
                             }else if(typeof(vyData[attributValue[1]][k]) == 'string'){
                                 
-                                let elementClone = document.createElement(saveChildTemplate[0].tagName);
-                                elementClone.setAttribute('class', saveChildTemplate[0].getAttribute('class') ? null : '');
+                                let cloningEl = saveChildTemplate[0].cloneNode(true);
                                 
-                                if(saveChildTemplate[0].getAttribute('vy-for-val') != null){
-                                    elementClone.setAttribute('vy-for-val', saveChildTemplate[0].getAttribute('vy-for-val'));
-                                    elementClone.setAttribute('value', vyData[attributValue[1]][k]);
-                                    elementClone.innerText = vyData[attributValue[1]][k];
+                                if(saveChildTemplate[0].getAttribute(vyAttrForValue) != null){
+                                    cloningEl.innerText = vyData[attributValue[1]][k];
                                 }  
-                                cloneEl.push(elementClone);
+                                addEl.push(cloningEl);
                             }
 
                     }
-
-                    cloneEl.forEach((clone) => {
+                    addElObject.forEach((clone) => {
+                        clone.removeAttribute(vyAttrForValue);
+                        elemen.appendChild(clone);
+                    })
+                    addEl.forEach((clone) => {
+                        clone.removeAttribute(vyAttrForValue);
                         elemen.appendChild(clone);
                     })
                 }else{
@@ -162,8 +162,8 @@ function listRender(){
 
 // start event
 
-elClick.forEach((elemen) => {
-    let propertiesToBind = elemen.getAttribute(attributClick);
+vy_el_click.forEach((elemen) => {
+    let propertiesToBind = elemen.getAttribute(vyAttrClick);
     console.log(propertiesToBind);
     elemen.onclick = function (){
         window[propertiesToBind]();
@@ -172,8 +172,8 @@ elClick.forEach((elemen) => {
     
 })
 
-elOn.forEach((elemen) => {
-    let propertiesToBind = elemen.getAttribute(attributOn);
+vy_el_on.forEach((elemen) => {
+    let propertiesToBind = elemen.getAttribute(vyAttrOn);
     let attributValue = propertiesToBind.split(":");
     if(propertiesToBind.includes(":")){
         if(attributValue.length == 2){
@@ -192,9 +192,9 @@ elOn.forEach((elemen) => {
 // end event
 
 // start binding text
-function bindingText(){
-    elText.forEach((elemen) => {
-        let propertiesToBind = elemen.getAttribute(attributText);
+function _bindingText(){
+    vy_el_text.forEach((elemen) => {
+        let propertiesToBind = elemen.getAttribute(vyAttrText);
         elemen.innerText = vyData[propertiesToBind];
 
     })
@@ -204,24 +204,24 @@ function bindingText(){
 
 // start Initializing
 function vyLoadData(){
-    bindingText();
-    bindingHtml();
-    conditionalRender();
+    _bindingText();
+    _bindingHtml();
+    _conditionalRender();
 }
 
 function vyInit(){
-    bindingText();
-    bindingHtml();
-    listRender();
-    conditionalRender();
+    _bindingText();
+    _bindingHtml();
+    _listRender();
+    _conditionalRender();
 }
 
 // end Initializing
 
 // Start binding html
-function bindingHtml(){
-    elHtml.forEach((elemen) => {
-        let propertiesToBind = elemen.getAttribute(attributHtml);
+function _bindingHtml(){
+    vy_el_html.forEach((elemen) => {
+        let propertiesToBind = elemen.getAttribute(vyAttrHtml);
         elemen.innerHTML = vyData[propertiesToBind];
 
     })

@@ -169,7 +169,7 @@ Example with data object
 vyData.profilData = [
     {'firstname': 'Mina', 'lastname': 'Sharon'}, 
     {'firstname': 'Park', 'lastname': 'Jihyo'}, 
-    {'firstname': 'Jim', 'lastname': 'Dahyun'}
+    {'firstname': 'Kim', 'lastname': 'Dahyun'}
 ]
 </script>
 ```
