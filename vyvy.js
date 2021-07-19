@@ -5,7 +5,7 @@
 */
 
 
-//create all variable
+/* create all variable */
 var vyAttrInput = 'vy-input',
 vyAttrIf = 'vy-if',
 vyAttrClick = 'vy-click',
@@ -24,9 +24,9 @@ vy_el_html = document.querySelectorAll('[' + vyAttrHtml + ']'),
 vyData = {};
 vyAlias = {};
 
-//end all variable
+/* end all variable */
 
-// create data input binding
+/* create data input binding */
     
 vy_el_input.forEach((elemen) => {
     if(elemen.type == 'text' || elemen.type == 'textarea' || elemen.type == 'number' || elemen.type == 'password'){
@@ -44,9 +44,9 @@ vy_el_input.forEach((elemen) => {
         }
     }
 })
-// end data input binding
-
-// create conditional rendering
+/* end data input binding */
+ 
+/* create conditional rendering */
 
 
 function _conditionalRender(){
@@ -76,9 +76,9 @@ function _conditionalRender(){
     })
 }
 
-// end conditional rendering
+/* end conditional rendering */
 
-// create List rendering
+/* create List rendering */
 
 
 function _listRender(){
@@ -158,9 +158,9 @@ function _listRender(){
 }
 
 
-// end list rendering
+/* end list rendering */
 
-// start event
+/* start event */
 
 vy_el_click.forEach((elemen) => {
     let propertiesToBind = elemen.getAttribute(vyAttrClick);
@@ -189,9 +189,9 @@ vy_el_on.forEach((elemen) => {
     }
 })
 
-// end event
+/* end event */
 
-// start binding text
+/* start binding text */
 function _bindingText(){
     vy_el_text.forEach((elemen) => {
         let propertiesToBind = elemen.getAttribute(vyAttrText);
@@ -200,9 +200,9 @@ function _bindingText(){
     })
 }
 
-// end binding text
+/* end binding text */
 
-// start Initializing
+/* start Initializing */
 function vyLoadData(){
     _bindingText();
     _bindingHtml();
@@ -216,9 +216,9 @@ function vyInit(){
     _conditionalRender();
 }
 
-// end Initializing
+/* end Initializing */
 
-// Start binding html
+/* Start binding html */
 function _bindingHtml(){
     vy_el_html.forEach((elemen) => {
         let propertiesToBind = elemen.getAttribute(vyAttrHtml);
@@ -226,4 +226,4 @@ function _bindingHtml(){
 
     })
 }
-// end binding html
+/* end binding html */

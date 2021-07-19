@@ -20,12 +20,20 @@
 
 <button vy-on="click:rmfunc">gas</button> -->
 
-<input type="text" vy-input="namadepan" />
-<input type="text" vy-input="namabelakang" />
+<input type="text" vy-input="firstname" />
+<select vy-input="chose">
+    <option value="">Choose</option>
+    <option value="male">Man</option>
+    <option value="female">Female</option>
+</select>
+<textarea vy-input="desc"></textarea>
 
-<div vy-text="namadepan"></div>
-<div vy-text="namabelakang"></div>
+<div vy-text="firstname"></div>
+<div vy-text="chose"></div>
+<div vy-text="desc"></div>
 
+
+<br/><br/>
 <vy-template vy-for="color:colors" >
     <div style="font-weight: bold;" vy-for-val="color.nama.depan"></div>
     <div style="font-style: italic;" vy-for-val="color.warna"></div>
@@ -42,8 +50,9 @@
 <script src="vyvy.js"></script>
 <script>
 
-vyData.namadepan = '';
-vyData.namabelakang = '';
+vyData.chose = '';
+vyData.firstname = '';
+vyData.desc = '';
 
 vyData.htmltest = '<b>Mina Laff yuu</b>'
 

@@ -51,17 +51,22 @@ Use `vy-input` allows you to bind the value of an input element to vyData
 ```html
 <input type="text" vy-input="firstname" />
 <select vy-input="chose">
-    <option>Choose</option>
+    <option value="">Choose</option>
     <option value="male">Man</option>
     <option value="female">Female</option>
 </select>
 <textarea vy-input="desc"></textarea>
 
+<div vy-text="firstname"></div>
+<div vy-text="chose"></div>
+<div vy-text="desc"></div>
+
+
 <script src="https://cdn.jsdelivr.net/gh/mrtampan/vyvy/vyvy.js"></script>
 <script>
-    alert(vyData.chose);
-    alert(vyData.firstname);
-    alert(vyData.desc);
+    vyData.chose = '';
+    vyData.firstname = '';
+    vyData.desc = '';
 </script>
 ```
 
