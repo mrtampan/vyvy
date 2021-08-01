@@ -177,9 +177,15 @@ vy_el_on.forEach((elemen) => {
     let attributValue = propertiesToBind.split(":");
     if(propertiesToBind.includes(":")){
         if(attributValue.length == 2){
-            elemen[ 'on'+ attributValue[0]] = function(){
-                window[attributValue[1]]();
-                vyLoadData();           
+            elemen[ 'on'+ attributValue[0]] = function(event){
+
+                if(elemen.tagName == 'INPUT' && elemen.type == 'file'){
+                    window[attributValue[1]](event);
+                    vyLoadData();
+                }else{
+                    window[attributValue[1]]();
+                    vyLoadData(); 
+                }          
             }
         }else{
             console.error("vy-on must contain 2 parameter");

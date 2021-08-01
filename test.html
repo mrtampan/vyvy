@@ -20,6 +20,7 @@
 
 <button vy-on="click:rmfunc">gas</button> -->
 
+<!-- 
 <input type="text" vy-input="firstname" />
 <select vy-input="chose">
     <option value="">Choose</option>
@@ -45,10 +46,16 @@
 </vy-template>
 
 
-<div vy-html="htmltest"></div>
+<div vy-html="htmltest"></div> -->
+<input type="file" vy-on="change:cok" />
 
-<script src="vyvy-min.js"></script>
+
+<script src="vyvy.js"></script>
 <script>
+
+function cok(event){
+    console.log(event)
+}
 
 vyData.chose = '';
 vyData.firstname = '';
@@ -61,20 +68,20 @@ vyData.warnaku= [
 ]
 
 
+
 vyData.colors = [
     {'warna':'biru', 'nama': {'depan' : 'cuk'}}, {'warna':'kuning', 'nama': {'depan' : 'cak'}}, {'warna':'merah', 'nama': {'depan' : 'cok'}}
 ]
 
 vyData.colorActive = false;
 // vyData.hehe = true;
-// function rmfunc(){
-//     if(vyData.hehe == true){
-//         vyData.hehe = false;
-//     }else{
-//         vyData.hehe = true;
-//     }
-
-// }
+function rmfunc(){
+    if(vyData.hehe == true){
+        vyData.hehe = false;
+    }else{
+        vyData.hehe = true;
+    }
+}
 
 // function upperfunc(){
 //     let x = document.getElementById("fname");

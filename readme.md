@@ -194,3 +194,12 @@ function testFunc(){
 }
 </script>
 ```
+
+## vyvy compress by uglifyjs
+
+Use this CDN, to get faster performance in loading browser
+
+```html
+<script src="https://cdn.jsdelivr.net/gh/mrtampan/vyvy/vyvy-min.js"></script>
+```
+
