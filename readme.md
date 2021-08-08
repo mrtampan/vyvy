@@ -8,14 +8,14 @@ Vyvy.js is a javascript library for creating user interfaces, without using a vi
 `vyvy` can be used without a build step. Simply load it from a CDN:
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/mrtampan/vyvy/vyvy.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mrtampan/vyvy@alpha-v1/vyvy.js"></script>
 ```
 
 
 ### Quick Start
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/mrtampan/vyvy/vyvy.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mrtampan/vyvy@alpha-v1/vyvy.js"></script>
 <script>
 
 // create variable state
@@ -36,7 +36,7 @@ vyInit();
 Use `vydata` to store values locally
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/mrtampan/vyvy/vyvy.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mrtampan/vyvy@alpha-v1/vyvy.js"></script>
 
 <script>
     vyData.name = "mina";
@@ -62,7 +62,7 @@ Use `vy-input` allows you to bind the value of an input element to vyData
 <div vy-text="desc"></div>
 
 
-<script src="https://cdn.jsdelivr.net/gh/mrtampan/vyvy/vyvy.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mrtampan/vyvy@alpha-v1/vyvy.js"></script>
 <script>
     vyData.chose = '';
     vyData.firstname = '';
@@ -83,7 +83,7 @@ Use `vy-if` to remove and display components, but must use tags `<template>`
     <h4 >xxxxx</h4>
 </vy-template>
 
-<script src="https://cdn.jsdelivr.net/gh/mrtampan/vyvy/vyvy.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mrtampan/vyvy@alpha-v1/vyvy.js"></script>
 <script>
 vyData.activeComponent = false;
 
@@ -99,7 +99,7 @@ Use `vy-on` to use vanillaJS events, how to use it requires 2 parameters (event:
 <button vy-on="click:testFunc">testing</button>
 
 
-<script src="https://cdn.jsdelivr.net/gh/mrtampan/vyvy/vyvy.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mrtampan/vyvy@alpha-v1/vyvy.js"></script>
 <script>
 function upperfunc(){
     let x = document.getElementById("naming");
@@ -120,7 +120,7 @@ Use `vy-text` use v-text to display data from `vyData`
 ```html
 <div vy-text="name"></div>
 <div vy-text="age"></div>
-<script src="https://cdn.jsdelivr.net/gh/mrtampan/vyvy/vyvy.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mrtampan/vyvy@alpha-v1/vyvy.js"></script>
 
 <script>
     vyData.name = "mina";
@@ -134,7 +134,7 @@ Use `vy-html` to convert data from `vyData` to html
 
 ```html
 <div vy-html="sweetword"></div>
-<script src="https://cdn.jsdelivr.net/gh/mrtampan/vyvy/vyvy.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mrtampan/vyvy@alpha-v1/vyvy.js"></script>
 
 <script>
     vyData.sweetword = '<b>Kamu benar benar wangy wangy wangy</b>';
@@ -151,7 +151,7 @@ Example with data string
 <vy-template vy-for="color:colors">
     <div vy-for-val="color"></div>
 </vy-template>
-<script src="https://cdn.jsdelivr.net/gh/mrtampan/vyvy/vyvy.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mrtampan/vyvy@alpha-v1/vyvy.js"></script>
 
 <script>
 vyData.colors = [
@@ -168,7 +168,7 @@ Example with data object
     <div vy-for-val="profil.lastname"></div>
 </vy-template>
 
-<script src="https://cdn.jsdelivr.net/gh/mrtampan/vyvy/vyvy.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mrtampan/vyvy@alpha-v1/vyvy.js"></script>
 
 <script>
 vyData.profilData = [
@@ -187,7 +187,7 @@ Use `vy-click` event handling onclick
 ```html
 <button vy-click="testFunc">Testing</button>
 
-<script src="https://cdn.jsdelivr.net/gh/mrtampan/vyvy/vyvy.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mrtampan/vyvy@alpha-v1/vyvy.js"></script>
 <script>
 function testFunc(){
     alert("testing");
