@@ -200,6 +200,6 @@ function testFunc(){
 Use this CDN, to get faster performance in loading browser
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/mrtampan/vyvy/vyvy-min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mrtampan/vyvy@alpha-v1/vyvy-min.js"></script>
 ```
 
